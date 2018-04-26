@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BookSpace.Models
 {
     public class CommentDBModel
     {
-        public int Id { get; set; }
+        public string CommentId { get; set; }
 
-        [Required]
         public string Value { get; set; }
 
-        [Required]
-        public virtual ApplicationUser User { get; set; }
+        public string BookId { get; set; }
+        public BookDBModel Book { get; set; }
 
-        [Required]
-        public virtual BookDBModel Book { get; set; }
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
