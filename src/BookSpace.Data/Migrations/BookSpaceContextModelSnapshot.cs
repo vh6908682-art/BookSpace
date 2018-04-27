@@ -73,7 +73,7 @@ namespace BookSpace.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("BookSpace.Models.AuthorDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.Author", b =>
                 {
                     b.Property<string>("AuthorId")
                         .ValueGeneratedOnAdd();
@@ -87,20 +87,7 @@ namespace BookSpace.Data.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("BookSpace.Models.BookAuthor", b =>
-                {
-                    b.Property<string>("AuthorId");
-
-                    b.Property<string>("BookId");
-
-                    b.HasKey("AuthorId", "BookId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BooksAuthors");
-                });
-
-            modelBuilder.Entity("BookSpace.Models.BookDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.Book", b =>
                 {
                     b.Property<string>("BookId")
                         .ValueGeneratedOnAdd();
@@ -120,6 +107,19 @@ namespace BookSpace.Data.Migrations
                     b.HasKey("BookId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookSpace.Models.BookAuthor", b =>
+                {
+                    b.Property<string>("AuthorId");
+
+                    b.Property<string>("BookId");
+
+                    b.HasKey("AuthorId", "BookId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BooksAuthors");
                 });
 
             modelBuilder.Entity("BookSpace.Models.BookGenre", b =>
@@ -165,18 +165,20 @@ namespace BookSpace.Data.Migrations
                     b.ToTable("BooksUsers");
                 });
 
-            modelBuilder.Entity("BookSpace.Models.CommentDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.Comment", b =>
                 {
                     b.Property<string>("CommentId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("BookId");
 
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("Value")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .IsUnicode(true);
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("CommentId");
 
@@ -187,7 +189,7 @@ namespace BookSpace.Data.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("BookSpace.Models.GenreDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.Genre", b =>
                 {
                     b.Property<string>("GenreId")
                         .ValueGeneratedOnAdd();
@@ -201,7 +203,7 @@ namespace BookSpace.Data.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("BookSpace.Models.TagDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.Tag", b =>
                 {
                     b.Property<string>("TagId")
                         .ValueGeneratedOnAdd();
@@ -211,25 +213,25 @@ namespace BookSpace.Data.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("BookSpace.Models.UserAccessControlDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.UserAccessControl", b =>
                 {
                     b.Property<string>("UserId");
 
                     b.Property<DateTime>("BanEndTime")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 26, 11, 32, 57, 779, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 27, 16, 56, 20, 933, DateTimeKind.Local));
 
                     b.Property<DateTime>("LastLogin")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 26, 11, 32, 57, 779, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 27, 16, 56, 20, 933, DateTimeKind.Local));
 
                     b.Property<DateTime>("LockOutEndTime")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 26, 11, 32, 57, 779, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 27, 16, 56, 20, 933, DateTimeKind.Local));
 
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 26, 11, 32, 57, 776, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 27, 16, 56, 20, 928, DateTimeKind.Local));
 
                     b.HasKey("UserId");
 
@@ -346,12 +348,12 @@ namespace BookSpace.Data.Migrations
 
             modelBuilder.Entity("BookSpace.Models.BookAuthor", b =>
                 {
-                    b.HasOne("BookSpace.Models.AuthorDBModel", "Author")
+                    b.HasOne("BookSpace.Models.Author", "Author")
                         .WithMany("AuthorBooks")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookSpace.Models.BookDBModel", "Book")
+                    b.HasOne("BookSpace.Models.Book", "Book")
                         .WithMany("BookAuthors")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -359,12 +361,12 @@ namespace BookSpace.Data.Migrations
 
             modelBuilder.Entity("BookSpace.Models.BookGenre", b =>
                 {
-                    b.HasOne("BookSpace.Models.BookDBModel", "Book")
+                    b.HasOne("BookSpace.Models.Book", "Book")
                         .WithMany("BookGenres")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookSpace.Models.GenreDBModel", "Genre")
+                    b.HasOne("BookSpace.Models.Genre", "Genre")
                         .WithMany("GenreBooks")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -372,12 +374,12 @@ namespace BookSpace.Data.Migrations
 
             modelBuilder.Entity("BookSpace.Models.BookTag", b =>
                 {
-                    b.HasOne("BookSpace.Models.BookDBModel", "Book")
+                    b.HasOne("BookSpace.Models.Book", "Book")
                         .WithMany("BookTags")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookSpace.Models.TagDBModel", "Tag")
+                    b.HasOne("BookSpace.Models.Tag", "Tag")
                         .WithMany("TagBooks")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -385,20 +387,20 @@ namespace BookSpace.Data.Migrations
 
             modelBuilder.Entity("BookSpace.Models.BookUser", b =>
                 {
-                    b.HasOne("BookSpace.Models.BookDBModel", "Book")
+                    b.HasOne("BookSpace.Models.Book", "Book")
                         .WithMany("BookUsers")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BookSpace.Models.ApplicationUser", "User")
-                        .WithMany("Books")
+                        .WithMany("BookUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookSpace.Models.CommentDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.Comment", b =>
                 {
-                    b.HasOne("BookSpace.Models.BookDBModel", "Book")
+                    b.HasOne("BookSpace.Models.Book", "Book")
                         .WithMany("Comments")
                         .HasForeignKey("BookId");
 
@@ -407,11 +409,11 @@ namespace BookSpace.Data.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("BookSpace.Models.UserAccessControlDBModel", b =>
+            modelBuilder.Entity("BookSpace.Models.UserAccessControl", b =>
                 {
                     b.HasOne("BookSpace.Models.ApplicationUser", "User")
                         .WithOne("UserAccessControl")
-                        .HasForeignKey("BookSpace.Models.UserAccessControlDBModel", "UserId")
+                        .HasForeignKey("BookSpace.Models.UserAccessControl", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
