@@ -61,6 +61,10 @@ namespace BookSpace.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<bool>("isAdmin");
+
+                    b.Property<bool>("isAllowed");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -220,19 +224,19 @@ namespace BookSpace.Data.Migrations
 
                     b.Property<DateTime>("BanEndTime")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 27, 17, 21, 22, 994, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 494, DateTimeKind.Local));
 
                     b.Property<DateTime>("LastLogin")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 27, 17, 21, 22, 993, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 494, DateTimeKind.Local));
 
                     b.Property<DateTime>("LockOutEndTime")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 27, 17, 21, 22, 994, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 494, DateTimeKind.Local));
 
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 27, 17, 21, 22, 989, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 492, DateTimeKind.Local));
 
                     b.HasKey("UserId");
 
