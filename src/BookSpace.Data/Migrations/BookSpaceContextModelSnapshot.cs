@@ -99,6 +99,9 @@ namespace BookSpace.Data.Migrations
 
                     b.Property<string>("CoverUrl");
 
+                    b.Property<string>("Description")
+                        .IsUnicode(true);
+
                     b.Property<string>("Isbn");
 
                     b.Property<DateTime?>("PublicationYear");
@@ -216,31 +219,6 @@ namespace BookSpace.Data.Migrations
                     b.HasKey("TagId");
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("BookSpace.Models.UserAccessControl", b =>
-                {
-                    b.Property<string>("UserId");
-
-                    b.Property<DateTime>("BanEndTime")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 494, DateTimeKind.Local));
-
-                    b.Property<DateTime>("LastLogin")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 494, DateTimeKind.Local));
-
-                    b.Property<DateTime>("LockOutEndTime")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 494, DateTimeKind.Local));
-
-                    b.Property<DateTime>("RegistrationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 30, 1, 8, 23, 492, DateTimeKind.Local));
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("UserAccessControl");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -412,14 +390,6 @@ namespace BookSpace.Data.Migrations
                     b.HasOne("BookSpace.Models.ApplicationUser", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("BookSpace.Models.UserAccessControl", b =>
-                {
-                    b.HasOne("BookSpace.Models.ApplicationUser", "User")
-                        .WithOne("UserAccessControl")
-                        .HasForeignKey("BookSpace.Models.UserAccessControl", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
