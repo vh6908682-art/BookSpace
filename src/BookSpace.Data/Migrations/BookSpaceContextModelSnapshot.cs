@@ -96,6 +96,10 @@ namespace BookSpace.Data.Migrations
 
                     b.Property<DateTime?>("PublicationYear");
 
+                    b.Property<int>("RatesCount")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(1);
+
                     b.Property<decimal>("Rating");
 
                     b.Property<string>("Title")
