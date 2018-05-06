@@ -147,9 +147,13 @@ namespace BookSpace.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(false);
 
-                    b.Property<int>("Rate");
+                    b.Property<int>("Rate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("State");
+                    b.Property<int>("State")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(3);
 
                     b.HasKey("BookId", "UserId");
 
