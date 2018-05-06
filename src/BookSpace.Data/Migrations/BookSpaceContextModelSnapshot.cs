@@ -96,6 +96,10 @@ namespace BookSpace.Data.Migrations
 
                     b.Property<DateTime?>("PublicationYear");
 
+                    b.Property<int>("RatesCount")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(1);
+
                     b.Property<decimal>("Rating");
 
                     b.Property<string>("Title")
@@ -138,6 +142,14 @@ namespace BookSpace.Data.Migrations
                     b.Property<string>("BookId");
 
                     b.Property<string>("UserId");
+
+                    b.Property<bool>("HasRatedBook")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("Rate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
                     b.Property<int>("State");
 
