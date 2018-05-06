@@ -143,6 +143,12 @@ namespace BookSpace.Data.Migrations
 
                     b.Property<string>("UserId");
 
+                    b.Property<bool>("HasRatedBook")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("Rate");
+
                     b.Property<int>("State");
 
                     b.HasKey("BookId", "UserId");
