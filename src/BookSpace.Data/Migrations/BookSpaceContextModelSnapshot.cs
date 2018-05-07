@@ -361,7 +361,8 @@ namespace BookSpace.Data.Migrations
                 {
                     b.HasOne("BookSpace.Models.Book", "Book")
                         .WithMany("Comments")
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BookSpace.Models.ApplicationUser", "User")
                         .WithMany("Comments")
